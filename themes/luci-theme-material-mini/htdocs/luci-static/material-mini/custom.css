@@ -1,0 +1,11 @@
+
+:root {
+	--main-color: #0099CC;
+	--header-bg: #0099CC;
+	--header-color: #FFFFFF;
+	--menu-bg-color: #FFFFFF;
+	--menu-color: #404040;
+	--submenu-bg-hover: #D4D4D4;
+	--submenu-bg-hover-active: #0099CC;
+	--font-body: "Microsoft Yahei", "WenQuanYi Micro Hei", "sans-serif", "Helvetica Neue", "Helvetica", "Hiragino Sans GB";
+}
