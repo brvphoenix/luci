@@ -1,0 +1,7 @@
+#!/bin/sh
+uci batch <<-EOF
+	set luci.themes.MaterialMini=/luci-static/material-mini
+	set luci.main.mediaurlbase=/luci-static/material-mini
+	commit luci
+EOF
+exit 0
