@@ -228,16 +228,16 @@
 					e.addEventListener('click', function(){
 						var ul2 = this.nextElementSibling;
 						var tag = this;
-						if (ul2.style.display === "" || ul2.style.display === "none") {
+						if (!ul2.classList.contains("active")) {
 							ul2.classList.add("active");
 							tag.classList.add("active");
 							stop(ul2)
-							slideDown(ul2);
+							slideDown(ul2, 16);
 						}else{
 							ul2.classList.remove("active");
 							tag.classList.remove("active");
 							stop(ul2)
-							slideUp(ul2);
+							slideUp(ul2, 16);
 						}
 					});
 
@@ -257,7 +257,7 @@
 					});
 
 					if (e.classList.contains("active")) {
-						e.nextElementSibling.setAttribute("style", "display: block;");
+						slideDown(e.nextElementSibling, -1);
 					}
 				}
 			});
@@ -270,12 +270,12 @@
 			document.querySelector(".showSide").addEventListener('click', function () {
 				if (showSide){
 					document.querySelector(".darkMask").setAttribute("style", "display: none");
-					widthExpand(stop(document.querySelector(".main-left")), 0);
+					widthExpand(stop(document.querySelector(".main-left")), 0, 16);
 					document.querySelector(".main-right").setAttribute("style", "overflow-y: visible");
 					showSide = false;
 				}else{
 					document.querySelector(".darkMask").setAttribute("style", "display: block");
-					widthExpand(stop(document.querySelector(".main-left")), 15);
+					widthExpand(stop(document.querySelector(".main-left")), 15, 16);
 					document.querySelector(".main-right").setAttribute("style", "overflow-y: scroll");
 					showSide = true;
 				}
@@ -293,7 +293,7 @@
 				if (showSide) {
 					showSide = false;
 					this.style.display = "none";
-					widthExpand(stop(document.querySelector(".main-left")), 0);
+					widthExpand(stop(document.querySelector(".main-left")), 0, 16);
 					document.querySelector(".main-right").setAttribute("overflow-y", "visible");
 				}
 			});
@@ -317,42 +317,16 @@
 			});
 
 
-			function slideUp(ele) {
-				var fromHeight = ele.offsetHeight;
-				var toHeight = 0;
-				var step = Math.round(Math.abs(fromHeight - toHeight) / 10);
-				step = step < 8 ? 8 : step;
-
-				ele.timmer = requestAnimationFrame(function udf() {
-					fromHeight -= step;
-					if (fromHeight > toHeight){
-						ele.setAttribute("style", "display: block; overflow: hidden;height: " + fromHeight + "px");
-						ele.timmer = requestAnimationFrame(udf);
-					}else{
-						ele.removeAttribute("style");
-						stop(ele);
-					}
-				});
+			if (!window.requestAnimationFrame) {
+				requestAnimationFrame = function (fn) {
+					return setTimeout(fn, 17);
+				};
 			}
 
-			function slideDown(ele) {
-				ele.setAttribute("style", "display: block; position: absolute; visibility: hidden");
-				var toHeight = ele.offsetHeight;
-				ele.removeAttribute("style");
-
-				var fromHeight = ele.offsetHeight;
-				var step = Math.round(Math.abs(fromHeight - toHeight) / 10);
-				step = step < 8 ? 8 : step;
-				ele.timmer = requestAnimationFrame(function udf() {
-					fromHeight += step;
-					if (fromHeight < toHeight){
-						ele.setAttribute("style", "display: block;overflow: hidden;height: " + fromHeight + "px");
-						ele.timmer = requestAnimationFrame(udf);
-					}else{
-						ele.setAttribute("style", "display: block;");
-						stop(ele);
-					}
-				});
+			if (!window.cancelAnimationFrame) {
+				cancelAnimationFrame = function (id) {
+					clearTimeout(id);
+				};
 			}
 
 			function stop(ele) {
@@ -363,21 +337,56 @@
 				return ele;
 			}
 
-			function widthExpand(ele, toWidth){
-				var fromWidth = ele.offsetWidth;
-				toWidth = toWidth * 16;
-				var flag = toWidth - fromWidth > 0 ? 1 : -1;
-				var step = Math.round(Math.abs(toWidth - fromWidth) / 10);
-				step = step < 8 ? 8 : step;
+			function easeOutExpo(t, c) {
+				return c * (- Math.pow(2, - 20 * t) + 1);
+			}
+
+			function genAnimation(ele, attr, fromValue, toValue, delta, callback) {
+				var start = 1;
+				var flag = toValue - fromValue > 0 ? 1 : -1;
+				var duration = delta < 0 ? 1 : Math.abs(toValue - fromValue) / delta;
+				var ampl = delta < 0 ? (toValue - fromValue) * 2 : flag * duration / (duration - 1) * delta;
 				ele.timmer = requestAnimationFrame(function udf() {
-					fromWidth += flag * step;
-					if (flag * fromWidth < flag * toWidth){
-						ele.setAttribute("style", "display:block;overflow: hidden;width: " + fromWidth + "px");
+					fromValue += easeOutExpo(start / duration, ampl);
+					start++;
+					if (flag * fromValue < flag * toValue){
+						stop(ele);
+						ele.setAttribute("style", "display: block;overflow: hidden;" + attr + ": " + fromValue + "px");
 						ele.timmer = requestAnimationFrame(udf);
 					}else{
-						ele.setAttribute("style", "width: " + toWidth + "px");
+						if (callback) callback(ele);
 						stop(ele);
 					}
+				});
+			}
+
+			function slideUp(ele, delta) {
+				var fromHeight = ele.offsetHeight;
+				var toHeight = 0;
+
+				genAnimation(ele, 'height', fromHeight, toHeight, delta, function (ele) {
+					ele.removeAttribute("style");
+				});
+			}
+
+			function slideDown(ele, delta) {
+				ele.setAttribute("style", "display: block; position: absolute; visibility: hidden");
+				var toHeight = ele.offsetHeight;
+				ele.removeAttribute("style");
+				var fromHeight = ele.offsetHeight;
+
+				genAnimation(ele, 'height', fromHeight, toHeight, delta, function (ele) {
+					ele.removeAttribute("style");
+					ele.setAttribute("style", "display: block;");
+				});
+			}
+
+			function widthExpand(ele, toWidth, delta){
+				var fromWidth = ele.offsetWidth;
+				toWidth = toWidth * 16;
+
+				genAnimation(ele, 'width', fromWidth, toWidth, delta, function (ele) {
+					ele.setAttribute("style", "width: " + toWidth + "px");
 				});
 			}
 		});
