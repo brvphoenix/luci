@@ -533,7 +533,7 @@ String.prototype.format = function()
 	var str = this;
 	var out = '';
 	var re = /^(([^%]*)%('.|0|\x20)?(-)?(\d+)?(\.\d+)?(%|b|c|d|u|f|o|s|x|X|q|h|j|t|m))/;
-	var a = b = [], numSubstitutions = 0, numMatches = 0;
+	var a = [], b = [], numSubstitutions = 0, numMatches = 0;
 
 	while (a = re.exec(str)) {
 		var m = a[1];
