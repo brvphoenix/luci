@@ -1,11 +1,18 @@
-
 :root {
-	--main-color: #0099CC;
-	--header-bg: #0099CC;
-	--header-color: #FFFFFF;
-	--menu-bg-color: #FFFFFF;
-	--menu-color: #404040;
-	--submenu-bg-hover: #D4D4D4;
-	--submenu-bg-hover-active: #0099CC;
+	--main-bright-color: #0099CC;
+	--main-dark-color: #404040;
+	--main-grey-color: #eee;
+	--secondary-bright-color: #FFFFFF;
+	--secondary-dark-color: #808080;
+	--secondary-grey-color: #D4D4D4;
+	--third-grey-color: #f6f6f6;
+	--error-color: #FF0000;
+	--danger-color: #CC4444;
+	--warning-color: #F0E269;
+	--notice-color: #F09090;
+	--info-color: #62cffc;
+	--main-green-color: #00FF00;
+	--secondary-green-color: #90f090;
 	--font-body: "Microsoft Yahei", "WenQuanYi Micro Hei", "sans-serif", "Helvetica Neue", "Helvetica", "Hiragino Sans GB";
+	--header-height: 4rem;
 }

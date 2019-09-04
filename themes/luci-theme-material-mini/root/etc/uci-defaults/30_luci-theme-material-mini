@@ -1,7 +1,12 @@
 #!/bin/sh
-uci batch <<-EOF
-	set luci.themes.MaterialMini=/luci-static/material-mini
-	set luci.main.mediaurlbase=/luci-static/material-mini
-	commit luci
-EOF
+
+if [ "$PKG_UPGRADE" != 1 ]; then
+	uci get luci.themes.MaterialMini >/dev/null 2>&1 || \
+	uci batch <<-EOF
+		set luci.themes.MaterialMini=/luci-static/material-mini
+		set luci.main.mediaurlbase=/luci-static/material-mini
+		commit luci
+	EOF
+fi
+
 exit 0
