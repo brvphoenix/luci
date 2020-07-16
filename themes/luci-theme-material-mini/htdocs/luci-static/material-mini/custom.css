@@ -6,13 +6,26 @@
 	--secondary-dark-color: #808080;
 	--secondary-grey-color: #D4D4D4;
 	--third-grey-color: #f6f6f6;
-	--error-color: #FF0000;
-	--danger-color: #CC4444;
+	--error-color: #CC4444;
+	--danger-color: #F09090;
 	--warning-color: #F0E269;
-	--notice-color: #F09090;
+	--notice-color: #fff;
 	--info-color: #62cffc;
 	--main-green-color: #00FF00;
 	--secondary-green-color: #90f090;
 	--font-body: "Microsoft Yahei", "WenQuanYi Micro Hei", "sans-serif", "Helvetica Neue", "Helvetica", "Hiragino Sans GB";
 	--header-height: 4rem;
+	--base-font-size: 0.8rem;
+}
+
+
+@font-face {
+	font-family: 'icomoon';
+	src: url('fonts/font.eot');
+	src: url('fonts/font.eot') format('embedded-opentype'),
+	url('fonts/font.ttf') format('truetype'),
+	url('fonts/font.woff') format('woff'),
+	url('fonts/font.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
