@@ -2,6 +2,18 @@
 	"luci-app-aria2": {
 		"description": "Grant UCI access for luci-app-aria2",
 		"read": {
+			"ubus": {
+				"service": [ "list" ]
+			},
+			"file": {
+				"/etc/group": [ "read" ],
+				"/etc/passwd": [ "read" ],
+				"/bin/cat": [ "exec" ],
+				"/bin/grep": [ "exec" ],
+				"/sbin/logread": [ "exec" ],
+				"/usr/bin/aria2c": [ "exec" ],
+				"/usr/bin/tail": [ "exec" ]
+			},
 			"uci": [ "aria2" ]
 		},
 		"write": {
