@@ -853,7 +853,7 @@ var {
 	box-shadow: none;
 }
 
-:not(.cbi-map-tabbed) > .cbi-section + .cbi-section {
+.cbi-section + .cbi-section {
 	margin-top: 1rem;
 }
 
@@ -970,10 +970,12 @@ table tr:not(.cbi-rowstyle-2):nth-of-type(2n+1),
 	height: auto;
 	max-height: none;
 	overflow: visible;
+	margin-top: 0 !important;
 }
 
 [data-tab-active="false"],
-.cbi-map-tabbed > :not([data-tab-active]) {
+.cbi-map-tabbed > :not([data-tab-active]),
+[data-initialized] > :not([data-tab-active]) {
 	margin: 0 !important;
 	padding: 0 !important;
 }
@@ -1048,7 +1050,7 @@ table tr:not(.cbi-rowstyle-2):nth-of-type(2n+1),
 */
 button, .btn, .item::after {
 	display: inline-block;
-	padding: .4rem .6rem;5
+	padding: .4rem .6rem;
 	font-size: .8rem;
 	line-height: 1rem;
 	border-radius: .2rem;
@@ -1654,13 +1656,13 @@ div[id$=".editlist"] {
 	background: var(--error-color);
 	color: var(--secondary-bright-color);
 	border-radius: .6rem;
-	height: 1.1rem;
-	padding: 0 .25rem;
-	font-size: .9rem;
+	height: 0.75rem;
+	padding: 0 .125rem;
+	font-size: .8rem;
 	display: inline-block;
 	font-weight: bold;
-	min-width: .6rem;
-	margin: -.1rem 0 0 -.2rem;
+	min-width: .5rem;
+	margin: -.1rem .2rem 0 -.2rem;
 	text-align: center;
 }
 
@@ -1684,6 +1686,7 @@ div[id$=".editlist"] {
 	bottom: 0;
 	width: 1em;
 	height: 1em;
+	line-height: 100%;
 	animation: spin 1s linear infinite;
 	content: "\e603";
 	margin: auto;
@@ -1696,8 +1699,7 @@ button.spinning, .btn.spinning {
 button.spinning::before, .btn.spinning::before {
 	filter: invert(1);
 	left: .2rem;
-	width: 1.2em;
-	height: 1.2em;
+	font-size: 1.2em;
 }
 
 #view > div.spinning:first-child {
