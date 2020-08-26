@@ -133,10 +133,10 @@ body[data-page=""] .main-right {
 }
 
 body[data-page=""] #maincontent {
-	min-width: 49rem;
 	display: inline-block;
 	padding: 2rem 4rem;
 	margin-top: 2rem;
+	min-width: 49rem;
 	background-color: var(--secondary-bright-color);
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .16), 0 0 2px 0 rgba(0, 0, 0, .12);
 	text-align: left;
@@ -164,7 +164,7 @@ body[data-page=""] footer {
 
 #mainmenu > ul {
 	position: sticky;
-	top: 1em;
+	top: 0;
 }
 
 #mainmenu ul > li {
@@ -232,8 +232,8 @@ footer > a {
 	color: var(--secondary-dark-color);
 	text-decoration: none;
 }
-/* 
-*	darkMask 
+/*
+*	darkMask
 */
 .darkMask {
 	position: fixed;
@@ -242,7 +242,6 @@ footer > a {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, .56);
-	content: "";
 }
 .darkMask.active {
 	display: block;
@@ -316,6 +315,7 @@ body.modal-overlay-active #modal_overlay {
 	display: table;
 	width: 100%;
 	border: 1px solid var(--main-grey-color);
+	margin: 0 0 1rem 0;
 	position: relative;
 }
 
@@ -335,7 +335,7 @@ body.modal-overlay-active #modal_overlay {
 	white-space: normal;
 	vertical-align: middle;
 	text-align: center;
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 .tr.drag-over-above {
@@ -445,7 +445,7 @@ body.modal-overlay-active #modal_overlay {
 }
 
 [data-page="admin-status-iptables"] div.right {
-	margin-bottom: .2rem !important;
+	margin: -1rem 0 .2rem !important;
 }
 
 [data-page="admin-network-network"] .table .td:nth-of-type(2) {
@@ -663,6 +663,7 @@ pre {
 	box-shadow: inset 0 0 2px var(--main-dark-color);
 	padding: .25rem;
 	overflow: auto;
+	white-space: pre-wrap;
 }
 
 small {
@@ -729,6 +730,7 @@ var {
 .ifacebadge {
 	display: inline-flex;
 	align-items: center;
+	white-space: nowrap;
 }
 
 .ifacebadge.large {
@@ -1031,7 +1033,8 @@ table tr:not(.cbi-rowstyle-2):nth-of-type(2n+1),
 /*
 *	forms
 */
-button, .btn, .item::after {
+button, .btn, .item::after,
+input[type="button"] {
 	background: transparent none;
 	color: var(--main-dark-color);
 	line-height: 2em;
@@ -1070,7 +1073,7 @@ button + button, .btn + .btn, button + .btn, .btn + button, select + button {
 	margin-left: .25em;
 }
 
-button.important {
+.btn.important {
 	background: var(--main-bright-color);
 	color: var(--secondary-bright-color);
 }
@@ -1108,15 +1111,6 @@ button[disabled], button.disabled, .btn[disabled], .btn.disabled {
 	color: var(--error-color);
 }
 
-/*
-.cbi-checkbox {
-	padding-top: .6rem;
-}
-
-.cbi-checkbox > input {
-	line-height: 1.25;
-}
-*/
 input:not([type]),
 input[type="text"],
 input[type="password"],
@@ -1152,15 +1146,15 @@ select[disabled],
 	pointer-events: none;
 }
 
-input:not([type]) + .btn, input:not([type]) + button,
+/*input:not([type]) + .btn, input:not([type]) + button,
 input[type="text"] + .btn, input[type="text"] + button,
 input[type="password"] + .btn, input[type="password"] + button {
-	line-height: calc(2em - 1px);
-}
+	margin-bottom: 1px;
+}*/
 
 input[type="checkbox"] {
 	height: 2em;
-/*	vertical-align: middle;*/
+	vertical-align: middle;
 	-moz-appearance: checkbox;
 	-webkit-appearance: checkbox;
 }
@@ -1187,7 +1181,7 @@ textarea {
 .cbi-input-invalid,
 .cbi-input-invalid:focus,
 .cbi-value-error input {
-	color: var(--error-color);
+	color: var(--error-color) !important;
 	border-color: var(--error-color) !important;
 }
 /*
@@ -1219,12 +1213,12 @@ textarea {
 .control-group > select + .btn, .control-group > select + button {
 	margin-left: .25em;
 }
-/*
+
 .control-group > input:not([type]) + .btn, .control-group > input:not([type]) + button,
 .control-group > input[type="text"] + .btn, .control-group > input[type="text"] + button,
 .control-group > input[type="password"] + .btn, .control-group > input[type="password"] + button {
-	margin: .125em .125em calc(.125em + 2px) calc(-.125em - .25em) !important;
-}*/
+	/*margin: .125em .125em calc(.125em + 2px) calc(-.125em - .25em) !important;*/
+}
 /*
  *	cbi-value
  */
@@ -1233,6 +1227,10 @@ textarea {
 	flex-wrap: wrap;
 	padding: .6rem 1rem;
 	line-height: 1.25;
+}
+
+.cbi-value[data-widget="CBI.ContainerValue"] {
+	padding: 0;
 }
 
 .cbi-value > label:first-child {
@@ -1248,7 +1246,15 @@ textarea {
 
 .cbi-value > .cbi-section {
 	flex: 1 1 100%;
+	padding: 0 1rem !important;
+	border: none !important;
+	box-shadow: none !important;
 }
+
+.cbi-section-node > .cbi-value {
+	padding: 0.6rem 0;
+}
+
 .cbi-map-descr,
 .cbi-tab-descr,
 .cbi-section-descr,
@@ -1291,8 +1297,8 @@ textarea {
 }
 
 .cbi-dynlist > .item {
+	margin-right: 2rem;
 	min-width: 0;
-	width: 18rem;
 	position: relative;
 	pointer-events: none;
 	word-break: break-all;
@@ -1303,20 +1309,17 @@ textarea {
 	top: 0;
 	right: -2rem;
 	bottom: 0;
-	width: calc(.8rem - 2px);
-	padding: .3rem .6rem;
+	padding: 0;
+	margin: 0 0 -2px 0;
+	width: calc(2rem - 2px);
 	font-size: .8rem;
 	border: 1px solid var(--error-color);
-	margin: 0 0 -1px 0;
-	line-height: calc(2em - 1px);
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
 	position: absolute;
-	text-align: center;
 	color: var(--error-color);
 	font-weight: bold;
-	cursor: pointer;
 	pointer-events: all;
 }
 
@@ -1340,6 +1343,7 @@ textarea {
 
 .cbi-dynlist > .add-item > .btn {
 	flex: 0 0 2rem;
+	margin-bottom: 0;
 	text-align: center;
 }
 /*
@@ -1365,7 +1369,8 @@ textarea {
 }
 
 .cbi-dropdown.btn > ul:not(.dropdown) {
-	padding: .5em .6em;
+	padding: 0 .6em;
+	line-height: 2em;
 }
 
 .cbi-dropdown.btn.spinning > ul:not(.dropdown) {
@@ -1675,6 +1680,8 @@ div[id$=".editlist"] {
 	left: .6em;
 	width: 1em;
 	height: 1em;
+	line-height: normal;
+	font-size: 1.25em;
 	animation: spin 1s linear infinite;
 	content: "\e603";
 	margin: auto;
@@ -1687,7 +1694,6 @@ button.spinning, .btn.spinning {
 button.spinning::before, .btn.spinning::before {
 	filter: invert(1);
 	left: .2em;
-	font-size: 1.2em;
 }
 
 #view > div.spinning:first-child {
@@ -1711,17 +1717,13 @@ button.spinning::before, .btn.spinning::before {
 		width: 80%;
 	}
 
-	.cbi-tabmenu > li > a {
-		padding: .2rem .5rem;
-	}
-
 	table, .table {
 		font-size: .7rem !important;
 		width: 100% !important;
 	}
 
 	.cbi-value > label:first-child {
-		min-width: 12rem;
+/*		min-width: 12rem;*/
 		padding-right: 1rem;
 	}
 
@@ -1729,8 +1731,21 @@ button.spinning::before, .btn.spinning::before {
 	input[type="text"],
 	input[type="password"],
 	select,
-	.cbi-dropdown:not(.btn):not(.cbi-button) {
+	.cbi-dropdown:not(.btn):not(.cbi-button),
+	.cbi-dynlist {
 		min-width: 18rem;
+	}
+
+	.cbi-dynlist > .add-item > input {
+		min-width: 16rem;
+	}
+
+	.control-group {
+		min-width: 18.25rem;
+	}
+
+	div[id$=".ipaddr"] > input, .cbi-value-field > div > input[type="password"] {
+		min-width: 16rem;
 	}
 }
 
@@ -1739,17 +1754,17 @@ button.spinning::before, .btn.spinning::before {
 		width: 90%;
 	}
 
-	.main-right {
-		width: 1vw;
+	body[data-page=""] > #menubar > h2 {
+		display: none;
+	}
+
+	body[data-page=""] > .main .cbi-value-title {
+		text-align: left;
 	}
 
 	#menubar {
 		background-image: unset;
 		padding: 0 .5em;
-	}
-
-	body[data-page=""] > #menubar > h2 {
-		display: none;
 	}
 
 	#menubar > h2 {
@@ -1819,21 +1834,30 @@ button.spinning::before, .btn.spinning::before {
 		max-width: 15rem;
 	}
 
-	body[data-page=""] > .main .cbi-value-title {
-		text-align: left;
-	}
-
 	.cbi-value > label:first-child {
-		min-width: 8rem;
-		padding-right: 1rem;
+/*		min-width: 8rem;*/
+		padding-right: .5rem;
 	}
 
 	input:not([type]),
 	input[type="text"],
 	input[type="password"],
 	select,
-	.cbi-dropdown:not(.btn):not(.cbi-button) {
+	.cbi-dropdown:not(.btn):not(.cbi-button),
+	.cbi-dynlist {
 		min-width: 15rem;
+	}
+
+	.cbi-dynlist > .add-item > input {
+		min-width: 13rem;
+	}
+
+	div[id$=".ipaddr"] > input, .cbi-value-field > div > input[type="password"] {
+		min-width: 13rem;
+	}
+
+	.control-group {
+		min-width: 15.25rem;
 	}
 
 	#diag-rc-output > pre {
@@ -1889,12 +1913,8 @@ button.spinning::before, .btn.spinning::before {
 		font-size: .9rem;
 	}
 
-	.cbi-tabmenu > li {
-		padding: .6rem 0;
-	}
-
 	.cbi-tabmenu > li > a {
-		padding: .2rem .3rem;
+		padding: .375em .5rem;
 		font-size: .9rem;
 	}
 
@@ -1913,8 +1933,7 @@ button.spinning::before, .btn.spinning::before {
 
 	.tr {
 		display: block;
-/*		border-bottom: 1px solid var(--main-dark-color);*/
-		margin-bottom: .5em;
+/*		margin-bottom: .5em;*/
 		padding-bottom: .5em;
 	}
 
@@ -1988,6 +2007,20 @@ button.spinning::before, .btn.spinning::before {
 		min-width: 10rem;
 	}
 
+	.cbi-dynlist > .add-item > input {
+		min-width: 8rem;
+	}
+
+	.control-group {
+		flex: 1;
+		min-width: 10.25rem;
+	}
+
+	div[id$=".ipaddr"] > input, .cbi-value-field > div > input[type="password"] {
+		min-width: 8rem;
+		width: 100%;
+	}
+
 /*	button, .btn {
 		line-height: 1.8rem;
 		font-size: 1.2rem;
@@ -1998,8 +2031,10 @@ button.spinning::before, .btn.spinning::before {
 	}
 */
 	.cbi-value > label:first-child {
+		padding: 0 0 .5em 0;
 		flex: 1 0 100%;
 		text-align: left;
+		background-color: var(--third-grey-color);
 	}
 
 	.cbi-value > .cbi-value-field {
@@ -2012,6 +2047,9 @@ button.spinning::before, .btn.spinning::before {
 	.cbi-value > .cbi-value-field > div[id] {
 		display: flex;
 		flex-direction: row;
+	}
+	.cbi-value > .cbi-value-field > div.cbi-dynlist {
+		flex-direction: column;
 	}
 
 	.cbi-value > .cbi-value-field > div[id] > input:not([type="checkbox"]),
@@ -2044,16 +2082,12 @@ button.spinning::before, .btn.spinning::before {
 		flex-basis: 100%;
 	}
 
-	.cbi-checkbox {
+/*	.cbi-checkbox {
 		margin: .25rem;
-	}
+	}*/
 
 	.cbi-tooltip {
 		font-size: 1rem;
 		box-shadow: 0 0 4px rgba(0, 0, 0, .7);
-	}
-
-	.cbi-value > label:first-child {
-		padding: 0 0 .5em 0;
 	}
 }
