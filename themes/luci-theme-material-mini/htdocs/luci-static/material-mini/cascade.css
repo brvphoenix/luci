@@ -1754,6 +1754,10 @@ button.spinning::before, .btn.spinning::before {
 		width: 90%;
 	}
 
+	body.active {
+		overflow-y: hidden;
+	}
+
 	body[data-page=""] > #menubar > h2 {
 		display: none;
 	}
@@ -1827,7 +1831,7 @@ button.spinning::before, .btn.spinning::before {
 		transition: max-width .25s ease-in-out, padding .25s ease-in-out;
 		position: fixed;
 		z-index: 900;
-		height: 100%;
+		height: calc(100% - var(--header-height, 4rem));
 	}
 
 	#mainmenu.active {

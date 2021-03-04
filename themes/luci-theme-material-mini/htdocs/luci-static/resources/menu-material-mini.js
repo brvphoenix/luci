@@ -140,12 +140,14 @@ return baseclass.extend({
 			bar.classList.remove('active');
 			mask.classList.remove('active');
 			main.classList.remove('active');
+			document.body.classList.remove("active");
 		}
 		else {
 			btn.classList.add('active');
 			bar.classList.add('active');
 			mask.classList.add('active');
 			main.classList.add('active');
+			document.body.classList.add("active");
 		}
 	},
 
@@ -168,8 +170,8 @@ return baseclass.extend({
 				document.querySelector('#mainmenu').classList.remove('active');
 				this.classList.remove('active');
 				document.querySelector(".main-right").classList.remove('active');
+				document.body.classList.remove("active");
 			}
 		});
 	}
 });
-
