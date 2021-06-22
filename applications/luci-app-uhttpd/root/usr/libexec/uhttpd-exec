@@ -1,0 +1,12 @@
+#!/bin/sh
+
+action=$1
+shift
+
+case "$action" in
+	rm)
+		key_file="$(uci -q get uhttpd.main.key)"
+		cert_file="$(uci -q get uhttpd.main.cert)"
+		rm "${key_file:-/etc/uhttpd.key}" "${cert_file:-/etc/uhttpd.crt}"
+	;;
+esac

@@ -2,9 +2,16 @@
 	"luci-app-uhttpd": {
 		"description": "Grant UCI access for luci-app-uhttpd",
 		"read": {
+			"ubus": {
+				"luci": [ "setInitAction" ],
+				"system": [ "board" ]
+			},
 			"uci": [ "uhttpd" ]
 		},
 		"write": {
+			"file": {
+				"/usr/libexec/uhttpd-exec": ["exec"]
+			},
 			"uci": [ "uhttpd" ]
 		}
 	}
