@@ -24,7 +24,7 @@ function pollLog(e) {
 		.then(function() {
 			var logFile = uci.get_first('aria2', 'aria2', 'log') || '/var/log/aria2.log';
 			return Promise.all([
-				fs.exec_direct('/usr/bin/tail', [ '-n', '50', logFile ]).then(function(res) {
+				fs.exec_direct('/usr/libexec/aria2-call', [ 'tail', logFile ]).then(function(res) {
 					return res.trim().split(/\n/).reverse().join('\n')
 				}),
 				fs.exec_direct('/sbin/logread', [ '-e', 'aria2' ]).then(function(res) {

@@ -6,26 +6,23 @@
 return view.extend({
 	load: function() {
 		return uci.load('aria2').then(function() {
-			var config_dir = uci.get_first('aria2', 'aria2', 'config_dir') || '/var/etc/aria2';
-			var config_file = '%s/aria2.conf.main'.format(config_dir);
-			var session_file = '%s/aria2.session.main'.format(config_dir);
-
-			return Promise.all([
-				fs.exec_direct('/bin/cat', [ config_file ]).then(function(res) {
-					return {
-						'file': config_file,
-						'rows': res.trim().split(/\n/).length,
-						'content': res.trim()
-					}
-				}),
-				fs.exec_direct('/bin/cat', [ session_file ]).then(function(res) {
-					return {
-						'file': session_file,
-						'rows': res.trim().split(/\n/).length,
-						'content': res.trim()
-					}
-				})
-			]);
+			var config_dir = uci.get_first('aria2', 'aria2', 'config_dir') || '/var/etc/aria2',
+			    list_files = ['conf', 'session'],
+			    actions = [];
+			for (var index = 0; index < list_files.length; ++index) {
+				var list_file = '%s/aria2.%s.main'.format(config_dir, list_files[index]);
+				actions.push(
+					fs.exec_direct('/usr/libexec/aria2-call', [ 'cat', list_file ])
+					.then(L.bind(function(file, res) {
+						return {
+							'file': file,
+							'rows': res.trim().split(/\n/).length,
+							'content': res.trim()
+						}
+					}, this, list_file))
+				);
+			}
+			return Promise.all(actions);
 		})
 	},
 
@@ -63,4 +60,4 @@ return view.extend({
 	handleSave: null,
 	handleSaveApply: null,
 	handleReset: null
-})
+});
