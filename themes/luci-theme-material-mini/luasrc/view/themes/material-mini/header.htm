@@ -43,8 +43,8 @@
 	<meta name="theme-color" content="#09c">
 	<meta name="msapplication-tap-highlight" content="no">
 	<meta name="msapplication-TileColor" content="#09c">
-	<meta name="application-name" content="<%=striptags( (boardinfo.hostname or "?") ) %> - LuCI">
-	<meta name="apple-mobile-web-app-title" content="<%=striptags( (boardinfo.hostname or "?") ) %> - LuCI">
+	<meta name="application-name" content="<%=striptags(boardinfo.hostname or "?") %> - LuCI">
+	<meta name="apple-mobile-web-app-title" content="<%=striptags(boardinfo.hostname or "?") %> - LuCI">
 	<link rel="stylesheet" href="<%=media%>/cascade.css">
 	<link rel="shortcut icon" href="<%=media%>/favicon.ico">
 	<% if node and node.css then %>
@@ -60,7 +60,7 @@
 
 <div id="menubar">
 	<h2 class="navigation"><a id="navigation" name="navigation"><%:Navigation%></a></h2>
-	<span class="hostname"><a href="/"><%=boardinfo.hostname or "?"%></a></span>
+	<span class="hostname"><a href="/"><%=striptags(boardinfo.hostname or "?")%></a></span>
 	<span id="indicators"></span>
 </div>
 
