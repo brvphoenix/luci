@@ -152,6 +152,7 @@ body[data-page=""] footer {
 */
 #mainmenu {
 	flex: 1 1 15rem;
+	max-width: 250px;
 	background-color: var(--secondary-bright-color);
 	color: var(--main-dark-color);
 	padding: 1em 0 0;
