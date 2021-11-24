@@ -1,19 +1,20 @@
 :root {
-	--main-bright-color: #0099cc;
+	--main-bright-color: #09c;
+	--secondary-bright-color: #fff;
 	--main-dark-color: #404040;
-	--main-grey-color: #eee;
-	--secondary-bright-color: #ffffff;
 	--secondary-dark-color: #808080;
+	--main-grey-color: #eee;
 	--secondary-grey-color: #d4d4d4;
 	--third-grey-color: #f6f6f6;
-	--error-color: #cc4444;
+	--main-green-color: #5cb85c;
+	--secondary-green-color: #bfffbf;
+	--main-blue-color: #0069d6;
+	--error-color: #c44;
 	--danger-color: #f09090;
 	--warning-color: #f0e269;
 	--notice-color: #fff;
 	--info-color: #62cffc;
-	--success-color: #5cb85c;
-	--main-green-color: #00ff00;
-	--secondary-green-color: #90f090;
+	--success-color: #4a4;
 	--font-body: "Microsoft Yahei", "WenQuanYi Micro Hei", "sans-serif", "Helvetica Neue", "Helvetica", "Hiragino Sans GB";
 	--header-height: 4rem;
 	--base-font-size: 0.8rem;

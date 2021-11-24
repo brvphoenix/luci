@@ -23,7 +23,7 @@ html {
 	height: 100%;
 	width: 100%;
 	margin: 0 auto;
-	background: #fff linear-gradient(90deg, rgba(0, 0, 0, .2), rgba(0, 0, 0 ,.15), rgba(0, 0, 0, .1));
+	background: var(--secondary-bright-color) linear-gradient(90deg, rgba(0, 0, 0, .2), rgba(0, 0, 0 ,.15), rgba(0, 0, 0, .1));
 }
 
 body {
@@ -1085,6 +1085,7 @@ button + button, .btn + .btn, button + .btn, .btn + button, select + button {
 }
 
 .btn.important {
+	border-color: var(--main-bright-color);
 	background: var(--main-bright-color);
 	color: var(--secondary-bright-color);
 }
@@ -1104,15 +1105,15 @@ button[disabled], button.disabled, .btn[disabled], .btn.disabled {
 .cbi-button-add,
 .cbi-button-positive,
 .cbi-button-save {
-	border-color: #4a4;
-	color: #4a4;
+	border-color: var(--success-color);
+	color: var(--success-color);
 }
 
 .cbi-button-action,
 .cbi-button-apply,
 .cbi-button-edit {
-	border-color: #0069d6;
-	color: #0069d6;
+	border-color: var(--main-blue-color);
+	color: var(--main-blue-color);
 }
 
 .cbi-button-negative,
