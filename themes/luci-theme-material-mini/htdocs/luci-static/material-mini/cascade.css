@@ -679,6 +679,10 @@ var {
 	color: var(--main-dark-color);
 	font-weight: bold;
 }
+
+p > a {
+	text-decoration: underline;
+}
 /*
  * widgets
  */
