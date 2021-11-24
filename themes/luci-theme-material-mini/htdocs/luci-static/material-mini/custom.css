@@ -11,13 +11,13 @@
 	--warning-color: #F0E269;
 	--notice-color: #fff;
 	--info-color: #62cffc;
+	--success-color: #5CB85C;
 	--main-green-color: #00FF00;
 	--secondary-green-color: #90f090;
 	--font-body: "Microsoft Yahei", "WenQuanYi Micro Hei", "sans-serif", "Helvetica Neue", "Helvetica", "Hiragino Sans GB";
 	--header-height: 4rem;
 	--base-font-size: 0.8rem;
 }
-
 
 @font-face {
 	font-family: 'icomoon';
