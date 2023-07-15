@@ -42,7 +42,7 @@ var commonConf = [
 
 var baseProxyConf = [
 	[form.Value, 'name', _('Proxy name'), undefined, {rmempty: false, optional: false}],
-	[form.ListValue, 'type', _('Proxy type'), _('ProxyType specifies the type of this proxy. Valid values include "tcp", "udp", "http", "https", "stcp", and "xtcp".<br />By default, this value is "tcp".'), {values: ['tcp', 'udp', 'http', 'https', 'stcp', 'xtcp']}],
+	[form.ListValue, 'type', _('Proxy type'), _('ProxyType specifies the type of this proxy. Valid values include "tcp", "udp", "http", "https", "stcp", "sudp" and "xtcp".<br />By default, this value is "tcp".'), {values: ['tcp', 'udp', 'http', 'https', 'stcp', 'sudp', 'xtcp']}],
 	[form.Flag, 'use_encryption', _('Encryption'), _('UseEncryption controls whether or not communication with the server will be encrypted. Encryption is done using the tokens supplied in the server and client configuration.<br />By default, this value is false.'), {datatype: 'bool'}],
 	[form.Flag, 'use_compression', _('Compression'), _('UseCompression controls whether or not communication with the server will be compressed.<br />By default, this value is false.'), {datatype: 'bool'}],
 	[form.Value, 'local_ip', _('Local IP'), _('LocalIp specifies the IP address or host name to proxy to.'), {datatype: 'host'}],
@@ -68,7 +68,9 @@ var httpProxyConf = [
 
 var stcpProxyConf = [
 	[form.ListValue, 'role', _('Role'), undefined, {values: ['server', 'visitor']}],
+	[form.Value, 'allow_users', _('Allowed users'), undefined, {depends: [{role: 'visitor'}]}],
 	[form.Value, 'server_name', _('Server name'), undefined, {depends: [{role: 'visitor'}]}],
+	[form.Value, 'server_user', _('Server user'), undefined, {depends: [{role: 'visitor'}]}],
 	[form.Value, 'sk', _('Sk')],
 ];
 
@@ -223,14 +225,6 @@ return view.extend({
 		s.option(form.Value, 'type', _('Proxy type')).modalonly = false;
 		s.option(form.Value, 'local_ip', _('Local IP')).modalonly = false;
 		s.option(form.Value, 'local_port', _('Local port')).modalonly = false;
-		o = s.option(form.Value, 'remote_port', _('Remote port'));
-		o.modalonly = false;
-		o.depends('type', 'tcp');
-		o.depends('type', 'udp');
-		o.cfgvalue = function() {
-			var v = this.super('cfgvalue', arguments);
-			return v&&v!='0'?v:'#';
-		};
 
 		defTabOpts(s, 'general', baseProxyConf, {modalonly: true});
 
@@ -243,8 +237,8 @@ return view.extend({
 		// HTTP
 		defTabOpts(s, 'http', httpProxyConf, {optional: true, modalonly: true, depends: {type: 'http'}});
 
-		// STCP and XTCP
-		defTabOpts(s, 'general', stcpProxyConf, {modalonly: true, depends: [{type: 'stcp'}, {type: 'xtcp'}]});
+		// STCP, SUDP and XTCP
+		defTabOpts(s, 'general', stcpProxyConf, {modalonly: true, depends: [{type: 'stcp'}, {type: 'sudp'}, {type: 'xtcp'}]});
 
 		// Plugin
 		defTabOpts(s, 'plugin', pluginConf, {modalonly: true});
