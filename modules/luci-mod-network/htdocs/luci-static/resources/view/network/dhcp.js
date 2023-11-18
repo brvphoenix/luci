@@ -337,6 +337,7 @@ return view.extend({
 		s.tab('mxhosts', _('MX'));
 		s.tab('cnamehosts', _('CNAME'));
 		s.tab('pxe_tftp', _('PXE/TFTP'));
+		s.tab('mac', _('MAC'));
 
 		s.taboption('filteropts', form.Flag, 'domainneeded',
 			_('Domain required'),
@@ -1089,6 +1090,26 @@ return view.extend({
 		so = ss.option(form.Flag, 'dns',
 			_('Forward/reverse DNS'),
 			_('Add static forward and reverse DNS entries for this host.'));
+
+		o = s.taboption('mac', form.SectionValue, '__mac__', form.TableSection, 'mac', null,
+			_('MAC are hardware addresses used to match clients to set tags on them.') + '<br /><br />' +
+			_('Use the <em>Add</em> Button to add a new MAC.'));
+		ss = o.subsection;
+		ss.addremove = true;
+		ss.anonymous = true;
+		ss.sortable = true;
+		ss.nodescriptions = true;
+		ss.modaltitle = _('Edit MAC');
+		ss.rowcolors = true;
+
+		so = ss.option(form.Value, 'mac', _('MAC match'));
+		so.validate = isValidMAC;
+		so.rmempty = false;
+		so.optional = false;
+
+		so = ss.option(form.Value, 'networkid', _('Set this Tag'));
+		so.rmempty = false;
+		so.optional = false;
 
 		o = s.taboption('leases', CBILeaseStatus, '__status__');
 
