@@ -1117,12 +1117,6 @@ button + button, .btn + .btn, button + .btn, .btn + button, select + button {
 	margin-left: .25em;
 }
 
-.btn.important {
-	border-color: var(--main-bright-color);
-	background: var(--main-bright-color);
-	color: var(--secondary-bright-color);
-}
-
 button.active, button:active, .btn.active, .btn:active {
 	box-shadow: 0 10px 20px rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23);
 }
@@ -1411,6 +1405,12 @@ textarea {
 	display: flex;
 	width: 100%;
 	line-height: 1rem;
+}
+
+.cbi-dropdown.btn, .btn.important {
+	border-color: var(--main-bright-color);
+	background: var(--main-bright-color);
+	color: var(--secondary-bright-color);
 }
 
 .cbi-dropdown.btn > ul:not(.dropdown) {
