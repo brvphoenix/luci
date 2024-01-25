@@ -292,6 +292,7 @@ return view.extend({
 		let noi18nstrings = {
 			etc_hosts: '<code>/etc/hosts</code>',
 			etc_ethers: '<code>/etc/ethers</code>',
+			exclamationmark_invert: '<code>!</code>',
 			localhost_v6: '<code>::1</code>',
 			loopback_slash_8_v4: '<code>127.0.0.0/8</code>',
 			not_found: '<code>Not found</code>',
@@ -303,6 +304,8 @@ return view.extend({
 			reverse_arpa: '<code>*.IN-ADDR.ARPA,*.IP6.ARPA</code>',
 			servers_file_entry01: '<code>server=1.2.3.4</code>',
 			servers_file_entry02: '<code>server=/domain/1.2.3.4</code>',
+			tagcodestring:'<code>tag</code>',
+			tag_named_ov_string: '<code>option(6):&lt;opt-name&gt;,[&lt;value&gt;[,&lt;value&gt;]]</code>',
 
 		};
 
@@ -338,6 +341,7 @@ return view.extend({
 		s.tab('cnamehosts', _('CNAME'));
 		s.tab('pxe_tftp', _('PXE/TFTP'));
 		s.tab('mac', _('MAC'));
+		s.tab('matchtags', _('Match Tags'));
 
 		s.taboption('filteropts', form.Flag, 'domainneeded',
 			_('Domain required'),
@@ -1110,6 +1114,38 @@ return view.extend({
 		so = ss.option(form.Value, 'networkid', _('Set this Tag'));
 		so.rmempty = false;
 		so.optional = false;
+
+		o = s.taboption('matchtags', form.SectionValue, '__tags__', form.TableSection, 'tag', null,
+			customi18n( _('A {tagcodestring} is an alphanumeric label. dnsmasq applies chosen DHCP options when a specific {tagcodestring} is encountered.')) + '<br />' +
+			customi18n( _('In other words: "This {tagcodestring} gets these {tag_named_ov_string}".')) + '<br />' +
+			customi18n( _('Note: invalid {tag_named_ov_string} combinations may cause dnsmasq to silently crash.')) + '<br /><br />' +
+			customi18n( _('Prepend a {tagcodestring} with {exclamationmark_invert} to invert their domain of application, e.g. to send options to a host lacking a {tagcodestring}.') ) + '<br /><br />' +
+			customi18n( _('Use the %s Button to add a new {tagcodestring}.').format( _('<em>Add</em>') ) ) );
+		ss = o.subsection;
+		ss.addremove = true;
+		ss.anonymous = true;
+		ss.sortable = true;
+		ss.nodescriptions = true;
+		ss.modaltitle = _('Edit tag');
+		ss.rowcolors = true;
+
+		so = ss.option(form.DynamicList, 'dhcp_option',
+			_('Apply these DHCP Options...'),
+			_('Options to be added for this tag.'));
+		so.rmempty = true;
+		so.optional = true;
+		so.placeholder = '3,192.168.10.1,10.10.10.1';
+
+		so = ss.option(form.Value, 'tag', _('...To this matching Tag'));
+		so.rmempty = false;
+		so.optional = false;
+		so.placeholder = 'specialgateways';
+
+		so = ss.option(form.Flag, 'force',
+			_('Force'),
+			_('Send options to clients that did not request them.'));
+		so.rmempty = false;
+		so.optional = true;
 
 		o = s.taboption('leases', CBILeaseStatus, '__status__');
 
