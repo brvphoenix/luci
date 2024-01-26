@@ -359,6 +359,7 @@ return view.extend({
 		s.tab('limits', _('Limits'));
 		s.tab('logging', _('Log'));
 		s.tab('files', _('Resolv &amp; Hosts Files'));
+		s.tab('subnettags', _('Subnet Tags'));
 		s.tab('leases', _('Static Leases'));
 		s.tab('hosts', _('Hostnames'));
 		s.tab('ipsets', _('IP Sets'));
@@ -693,6 +694,24 @@ return view.extend({
 		);
 		o.optional = true;
 		o.placeholder = '64.94.110.11';
+
+		o = s.taboption('subnettags', form.Value, 'networkid',
+			_('Set this Tag'),
+			_('Internal default: network name.') + '<br />' +
+			_('Set a tag for this network/range when other parameters match.'));
+		so.optional = true;
+		// so.noaliases = true;
+
+		o = s.taboption('subnettags', form.DynamicList, 'tag',
+			_('Match Tags'),
+			_('List of tags that a DHCP client must have to use this DHCP network/range.') + '<br />' +
+			_('When a host matches an entry then the special tag %s is set. Use %s to match all known hosts.').format('<code>known</code>', '<code>known</code>') + '<br /><br />' +
+			_('Ignore requests from unknown machines using %s.').format('<code>!known</code>') + '<br /><br />' +
+			_('If a host matches an entry which cannot be used because it specifies an address on a different subnet, the tag %s is set.').format('<code>known-othernet</code>'));
+		o.value('known', _('known'));
+		o.value('!known', _('!known (not known)'));
+		o.value('known-othernet', _('known-othernet (on different subnet)'));
+		so.optional = true;
 
 		o = s.taboption('devices', form.Value, 'port',
 			_('DNS server port'),
