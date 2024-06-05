@@ -1046,7 +1046,6 @@ table tr:not(.cbi-rowstyle-2):nth-of-type(2n+1),
 }
 
 .alert-message .btn {
-	background: inherit;
 	box-shadow: 0 0 2px var(--main-bright-color);
 }
 
@@ -1314,6 +1313,19 @@ textarea {
 	margin: 0 0 1em 0;
 }
 
+.cbi-map-descr a,
+.cbi-value-description a {
+	color: var(--main-bright-color);
+	text-decoration: none;
+	outline: 0;
+}
+.cbi-map-descr a:hover,
+.cbi-value-description a:hover {
+	color: var(--main-bright-color);
+	text-decoration: underline;
+	outline: 0;
+}
+
 .cbi-value-description::before {
 	font-family: 'icomoon';
 	content: "\f059";
@@ -1545,7 +1557,8 @@ textarea {
 	color: var(--main-dark-color);
 }
 
-.cbi-dropdown[open] > ul.dropdown > li.focus {
+.cbi-dropdown[open] > ul.dropdown > li.focus
+.cbi-dropdown[open] > ul.dropdown > li:hover {
 	background: var(--secondary-grey-color);
 }
 

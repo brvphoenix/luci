@@ -7,7 +7,15 @@
 include $(TOPDIR)/rules.mk
 
 LUCI_TITLE:=Material Theme Mini
-LUCI_DEPENDS:=
+LUCI_DEPENDS:=+luci-base
+
+define Package/luci-theme-material-mini/postrm
+#!/bin/sh
+[ -n "$${IPKG_INSTROOT}" ] || {
+	uci -q delete luci.themes.MaterialMini
+	uci commit luci
+}
+endef
 
 include ../../luci.mk
 
