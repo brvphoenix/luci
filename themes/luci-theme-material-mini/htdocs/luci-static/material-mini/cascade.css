@@ -751,8 +751,7 @@ p > a {
 	flex-direction: column;
 	padding: 0;
 	text-align: center;
-	width: 100%;
-	max-width: 100px;
+	min-width: 100px;
 }
 
 .ifacebox-head {
@@ -1256,6 +1255,7 @@ textarea {
 .control-group > input[type="text"] + .btn, .control-group > input[type="text"] + button,
 .control-group > input[type="password"] + .btn, .control-group > input[type="password"] + button {
 	/*margin: .125em .125em calc(.125em + 2px) calc(-.125em - .25em) !important;*/
+	flex: none;
 }
 /*
  *	cbi-value
@@ -1896,6 +1896,14 @@ button.spinning::before, .btn.spinning::before {
 		max-width: 15rem;
 	}
 
+	.cbi-modal .cbi-section {
+		padding: unset;
+		margin: unset;
+		min-width: inherit;
+		line-height: 1;
+		box-shadow: none;
+	}
+
 	.cbi-value > label:first-child {
 /*		min-width: 8rem;*/
 		padding-right: .5rem;
@@ -1924,6 +1932,33 @@ button.spinning::before, .btn.spinning::before {
 
 	#diag-rc-output > pre {
 		font-size: 1rem;
+	}
+
+	[data-page="admin-network-network"] .cbi-section-table-row {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	[data-page="admin-network-network"] .td[data-name="_ifacebox"] {
+		flex-basis: 40%;
+	}
+
+	[data-page="admin-network-network"] .td[data-name="_ifacestat"] {
+		flex-basis: 40%;
+	}
+
+	.td.cbi-section-actions {
+		flex-basis: 100%;
+	}
+
+	.td.cbi-section-actions > div {
+		display: flex;
+		flex-direction: row;
+		justify-content: left;
+	}
+
+	.td.cbi-section-actions > div > button {
+		flex: 1;
 	}
 }
 
@@ -1963,9 +1998,9 @@ button.spinning::before, .btn.spinning::before {
 		padding: 1em 1em 1em;
 	}
 
-	.cbi-section {
+	/*.cbi-section {
 		padding: 1rem;
-	}
+	}*/
 
 	#tabmenu {
 		margin: -1em -2em 2em;
@@ -2035,6 +2070,7 @@ button.spinning::before, .btn.spinning::before {
 	.td[data-title] {
 		position: relative;
 		padding: .2em 0 .2em 40%;
+		width: 100%;
 	}
 
 	td[data-title]::before,
@@ -2161,5 +2197,23 @@ button.spinning::before, .btn.spinning::before {
 	.cbi-tooltip {
 		font-size: 1rem;
 		box-shadow: 0 0 4px rgba(0, 0, 0, .7);
+	}
+}
+
+@media screen and (max-width: 480px) {
+	body {
+		font-size: .8rem;
+	}
+
+	.cbi-section {
+		padding: 1rem;
+	}
+
+	.ifacebadge.large {
+		font-size: .7rem;
+	}
+
+	.nowrap {
+	    white-space: normal !important;
 	}
 }
