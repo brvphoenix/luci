@@ -2198,6 +2198,35 @@ button.spinning::before, .btn.spinning::before {
 		font-size: 1rem;
 		box-shadow: 0 0 4px rgba(0, 0, 0, .7);
 	}
+
+	table.nft-rules > tr > th,
+	table.nft-rules > .tr > .th,
+	table.nft-rules > tr > table-titles,
+	table.nft-rules > .tr > .table-titles {
+		display: flex;
+	}
+
+	table.nft-rules > tr,
+	table.nft-rules > .tr {
+		display: flex;
+	}
+
+	table.nft-rules > tr > td,
+	table.nft-rules > .tr > .td {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+
+	table.nft-rules > tr > td > span,
+	table.nft-rules > .tr > .td > span {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	table.nft-rules .ifacebadge {
+		height: fit-content;
+	}
 }
 
 @media screen and (max-width: 480px) {
