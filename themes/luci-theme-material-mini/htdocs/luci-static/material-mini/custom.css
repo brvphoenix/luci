@@ -1,18 +1,32 @@
 :root {
-	--main-bright-color: #0099CC;
+	--main-bright-color: #09c;
+	--secondary-bright-color: #fff;
 	--main-dark-color: #404040;
-	--main-grey-color: #eee;
-	--secondary-bright-color: #FFFFFF;
 	--secondary-dark-color: #808080;
-	--secondary-grey-color: #D4D4D4;
+	--main-grey-color: #eee;
+	--secondary-grey-color: #d4d4d4;
 	--third-grey-color: #f6f6f6;
-	--error-color: #FF0000;
-	--danger-color: #CC4444;
-	--warning-color: #F0E269;
-	--notice-color: #F09090;
+	--main-green-color: #5cb85c;
+	--secondary-green-color: #bfffbf;
+	--main-blue-color: #0069d6;
+	--error-color: #c44;
+	--danger-color: #f09090;
+	--warning-color: #f0e269;
+	--notice-color: #fff;
 	--info-color: #62cffc;
-	--main-green-color: #00FF00;
-	--secondary-green-color: #90f090;
+	--success-color: #4a4;
 	--font-body: "Microsoft Yahei", "WenQuanYi Micro Hei", "sans-serif", "Helvetica Neue", "Helvetica", "Hiragino Sans GB";
 	--header-height: 4rem;
+	--base-font-size: 0.8rem;
+}
+
+@font-face {
+	font-family: 'icomoon';
+	src: url('fonts/font.eot');
+	src: url('fonts/font.eot') format('embedded-opentype'),
+	url('fonts/font.ttf') format('truetype'),
+	url('fonts/font.woff') format('woff'),
+	url('fonts/font.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }

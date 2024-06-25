@@ -69,11 +69,9 @@ return baseclass.extend({
 			]));
 		}
 
-		if (l == 1) {
-			var container = document.querySelector('#mainmenu');
-			container.appendChild(ul);
-			container.style.display = '';
-		}
+		if (l == 1)
+			document.querySelector('#mainmenu').appendChild(ul);
+
 		return ul;
 	},
 
@@ -103,7 +101,6 @@ return baseclass.extend({
 		var container = document.querySelector('#tabmenu'),
 		    l = (level || 0) + 1,
 		    ul = E('ul', { 'class': 'cbi-tabmenu' }),
-//		    ul = E('ul', { 'class': 'tabs' }),
 		    children = ui.menu.getChildren(tree),
 		    activeNode = null;
 
@@ -113,7 +110,6 @@ return baseclass.extend({
 		for (var i = 0; i < children.length; i++) {
 			var isActive = (L.env.dispatchpath[l + 2] == children[i].name),
 			    activeClass = isActive ? ' cbi-tab' : '',
-//			    activeClass = isActive ? ' active' : '',
 			    className = 'tabmenu-item-%s %s'.format(children[i].name, activeClass);
 
 			ul.appendChild(E('li', { 'class': className }, [
@@ -144,20 +140,18 @@ return baseclass.extend({
 			bar.classList.remove('active');
 			mask.classList.remove('active');
 			main.classList.remove('active');
+			document.body.classList.remove("active");
 		}
 		else {
 			btn.classList.add('active');
 			bar.classList.add('active');
 			mask.classList.add('active');
 			main.classList.add('active');
+			document.body.classList.add("active");
 		}
 	},
 
 	registerEvent: function() {
-		document.querySelectorAll(".main > .loading").forEach(function (e) {
-			if (e) e.classList.add('hidden');
-		});
-
 		document.querySelector('#menubar > .navigation')
 			.addEventListener('click', ui.createHandlerFn(this, 'handleSidebarToggle'));
 
@@ -176,8 +170,8 @@ return baseclass.extend({
 				document.querySelector('#mainmenu').classList.remove('active');
 				this.classList.remove('active');
 				document.querySelector(".main-right").classList.remove('active');
+				document.body.classList.remove("active");
 			}
 		});
 	}
 });
-
